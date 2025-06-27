@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  qtserver:
+    build: .
+    ports:
+      - "65434:65434"
+    container_name: qt_fedora_server

@@ -1,0 +1,17 @@
+# QT TCP Server (Fedora-based)
+FROM fedora:36
+
+# Установка Qt5 и компилятора
+RUN dnf update -y && \
+    dnf install -y qt5-qtbase-devel gcc-c++ make
+
+# Создание рабочей папки и копирование проекта
+WORKDIR /var/lib/server
+COPY . .
+
+# Компиляция проекта в исполняемый файл fedora_server
+RUN qmake && make && mv server fedora_server
+
+# Открываем порт и запускаем сервер
+EXPOSE 65432
+CMD ["./fedora_server"]
